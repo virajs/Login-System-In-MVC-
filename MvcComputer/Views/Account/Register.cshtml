@@ -1,0 +1,83 @@
+﻿@model MvcComputer.Models.RegisterModel
+
+@{
+Layout=null;
+}
+
+<script src="~/Scripts/jquery-1.11.1.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+
+
+@using (Ajax.BeginForm(new System.Web.Mvc.Ajax.AjaxOptions { UpdateTargetId = "result" }))
+{
+    @Html.AntiForgeryToken()
+   
+   
+
+   
+        <div id="result"></div>
+    <table  style="height:100%; width:100%;">
+        <thead>
+            <tr >
+                <th>
+                    Register
+                </th>
+            </tr>
+        </thead>
+
+        <tr id="username">
+            <td>
+            @Html.LabelFor(model => model.username, new { @class = "label" })
+ </td>
+      <td >      @Html.EditorFor(model => model.username)
+             @Html.ValidationMessageFor(model => model.username)
+          </td>           
+       </tr>
+
+        <tr id="useremail">
+            <td>
+            @Html.LabelFor(model => model.email, new { @class = "label" })
+        </td>
+        <td>
+            @Html.EditorFor(model => model.email)
+            @Html.ValidationMessageFor(model => model.email)
+            </td>
+         
+        </tr>
+        <tr>
+            <td>
+            @Html.LabelFor(model => model.password, new { @class = "label" })
+            </td>
+            <td>
+            @Html.EditorFor(model => model.password, new { id = "pwd" })
+            @Html.ValidationMessageFor(model => model.password)
+                </td>
+            </tr>
+        
+
+        <tr>
+            <td>
+            @Html.LabelFor(model => model.comparepwd, new { @class = "label" })
+        </td>
+            <td>
+            @Html.EditorFor(model => model.comparepwd)
+            @Html.ValidationMessageFor(model => model.comparepwd)
+                </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.ValidationSummary(true)
+            </td>
+        </tr>
+
+        <tr >
+            <td>
+            <input type="submit" value="Save" class="btn-primary btn" />
+                </td>
+       </tr>
+    </table>
+}
+       
+

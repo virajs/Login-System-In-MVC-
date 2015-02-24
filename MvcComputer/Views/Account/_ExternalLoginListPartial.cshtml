@@ -1,0 +1,19 @@
+﻿
+@{
+    Layout =null;
+}
+@model IEnumerable<MvcComputer.Models.ExternalLoginViewModel>
+<link href="~/CSS/Site.css" rel="stylesheet" />
+
+
+
+<p style="font-size:14pt;color:blueviolet;">Using another Service to Login</p>
+
+        @foreach (var loginInfo in Model)
+        {
+        //<button type="submit" id="@p.AuthenticationType" value="@p.AuthenticationType" name="provider">@p.AuthenticationType</button>
+            <p style="font-size:12pt;" >@Html.ActionLink(string.Format("Log In ({0})", loginInfo.provider), "ExternalLogin", "Account", new { providerName = @loginInfo.provider }, null)</p>
+        
+    
+        }
+        

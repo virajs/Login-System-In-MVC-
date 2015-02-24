@@ -1,0 +1,85 @@
+﻿@model MvcComputer.Models.ForgotPwdmodel
+
+@{
+    Layout = null;
+}
+
+<script src="~/Scripts/jquery-2.1.1.js"></script>
+
+
+@using (Ajax.BeginForm(new AjaxOptions { UpdateTargetId = "updatediv" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <table style="height:100%; width:100%;">
+        <tr>
+            <td>
+                <label>Username</label>
+                </td>
+            <td>
+                @Html.TextBoxFor(m=>m.username)
+                <div id="msg" ></div>
+                            </td>
+            </tr>
+        <tr>
+            <td>
+               @Html.ValidationMessageFor(m=>m.username)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Password</label>
+                </td>
+                <td>
+                    @Html.EditorFor(m=>m.password)
+                            </td>
+            </tr>
+        <tr>
+                        <td>
+                @Html.ValidationMessageFor(m=>m.password)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Confirm Password</label>
+                </td>
+            <td>
+                @Html.EditorFor(m=>m.comparepwd)
+                            </td>
+            </tr>
+        <tr>
+            <td>
+                @Html.ValidationMessageFor(m=>m.comparepwd)
+            </td>
+        </tr>
+    <tr>
+        <td>
+            <input type="submit" value="Submit" />
+        </td>
+    </tr>
+    </table>
+    <div id="updatediv"></div> 
+    
+}
+<script type="text/javascript" >
+    $(document).ready(function () {
+        $("#txtusername").change(function ()
+        {
+            $.ajax(
+                {
+                    url:'@Url.Action("UserNameCheck")',
+                    data: { username: $("#txtusername").val() },
+                    success: function (data) {
+                        if (data == "false") {                           
+                            $("#msg").html("User name not found")
+                        }
+
+                    },
+                    error: function (error){
+                        $("#msg").html(error)
+                    }
+                })
+        });
+    });
+
+</script>

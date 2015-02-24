@@ -1,0 +1,41 @@
+﻿@model MvcComputer.Models.ApplicationUser
+@using Microsoft.AspNet.Identity
+
+@{
+    Layout =null;
+}
+
+<script src="~/Scripts/jquery-2.1.1.js"></script>
+<link href="~/CSS/bootstrap.css" rel="stylesheet" />
+<link href="~/CSS/Site.css" rel="stylesheet" />
+
+@if(Request.IsAuthenticated)
+    
+{
+    using(Html.BeginForm("Logoff","Account"))
+{
+    ViewBag.user = @User.Identity.GetUserName();
+    <div  style="position:fixed; top:30px; left:150px; color:chartreuse; font-family:'Footlight MT';font-size:large">Welcome @User.Identity.GetUserName()</div>
+      <div style="position:fixed; top:50px; left:150px; color:chartreuse; font-family:'Footlight MT';font-size:large"> @Ajax.ActionLink("Logoff", "Logoff", null, new AjaxOptions { HttpMethod = "POST" }, new { id = "logoffstyle" ,@class="btn-link" })
+        </div>
+    //<a href="" id="Logoff">Logoff</a>
+}
+} 
+
+
+@*<script type="text/javascript">
+    $(document).ready(function () {
+        $("#Logoff").click(function () {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("Logoff")',
+                success:
+                    function () {
+                        alert("called");
+                    }
+            })
+
+        });
+    });
+
+</script>*@

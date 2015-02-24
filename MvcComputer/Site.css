@@ -1,0 +1,37 @@
+﻿* {
+    margin: 0px;
+    padding: 0px;
+}
+table {
+    padding:4px;
+}
+body {
+    background-color:grey;
+}
+
+
+tr,td {
+    padding: 3px;
+    text-align: center;
+     
+   }
+
+td>label{
+    display: block;
+    background-color:blue;
+   width:80px;
+    
+}
+
+.btn-primary {
+ color: #fff;
+  background-color: #428bca;
+  border-color: #357ebd;
+  width:70px;
+  height:30px;  
+}
+.dialogbox {
+    height: 300px;
+    width: 450px;
+    background-color: cadetblue;
+}

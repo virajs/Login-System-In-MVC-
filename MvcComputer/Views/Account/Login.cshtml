@@ -1,0 +1,135 @@
+﻿@model MvcComputer.Models.LoginModel
+@using Microsoft.Owin.Security
+
+
+
+<link href="~/Site.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-ui-1.11.2.js"></script>
+<script src="~/Scripts/jquery-2.1.1.js"></script>
+
+
+@{
+    ViewBag.Title = "Login";
+}
+
+
+<html>
+    <head>
+         @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryui")
+        <title>
+            Login
+        </title>
+    </head>
+        
+    <body>
+        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl },FormMethod.Post))
+        {      
+        <table style="position:fixed; top:130px; left:470px;">
+            <thead>
+                <tr>
+                    <th style="font-family:'League Gothic'; color:burlywood;">
+                          Login
+                    </th>
+                </tr>
+            </thead>
+            <tr>
+                <td>
+        <label class="label" >Username</label>
+                    </td>
+                <td>
+       @Html.TextBoxFor(m => m.username)
+                    </td>
+                <td>
+                    <div style="width:150px;">
+                    @Html.ValidationMessageFor(m=>m.username)
+                        </div>
+                </td>
+                </tr>
+            <tr>
+                <td>
+        <label class="label" >Password</label>
+                    </td>
+                <td>
+        @Html.TextBoxFor(m => m.password, new { type = "password" })
+                    </td>
+                <td>
+                    <div style="width:150px;">
+                    @Html.ValidationMessageFor(m=>m.password)
+                        </div>
+                </td>
+                </tr>
+            <tr>
+                <td>
+                    <label style="background-color:black; width:150px; color:#6EF6FC; font-style:italic; font-size:medium">
+                    <input type="checkbox" value="true"  name="rememberme"> Remember Me!
+                    </label>
+                    </td>
+                    <td>
+                    <a href=""  id="forgotpwd" >Forgot Password?</a>
+                                    </td>
+            </tr>
+             <tr>
+              <th>                  
+                  @Html.ValidationSummary(true)
+                      
+              </th>
+             </tr>                       
+            <tr>
+                <td>
+                    <input type="submit" value="Login" id="login" class="btn-primary" />
+                    </td>
+                <td>
+                    <input type="button" value="Register" id="register"  class="btn-primary"/>
+                </td>
+            </tr>
+                </table>
+          
+            
+        }
+
+               
+         <div class="col-md-4" style="position:fixed; top:300px;left:470px;">  
+             <hr style="border-bottom-width:thick; width:100%;" />           
+        <section id="socialLoginForm" style="position:relative; top:20px;">          
+       @{Html.RenderAction("FBLogin", "Account", new { @class = "btn-link" });}
+        </section>
+    </div>
+        
+            
+        
+  </body>            
+
+</html>
+
+<script type="text/javascript">
+    $(document).ready(function () { 
+
+        $("#register").click(function () {         
+            $('<iframe id="regframe" src=@Url.Action("Register","Account") class="dialog">').dialog({
+                open: function (event, ui) { $(this).css("height", 300), $(this).css("width", 450),$(this).css("background-color","cadetblue") },
+                autoopen: false,
+                modal: true,
+                close: function (event,ui) {window.open('@Url.Action("Index")',"_parent"); }
+              
+                          
+            });
+
+        });
+
+        $("#forgotpwd").click(function (e) {
+            $('<iframe id="pwdframe" src=@Url.Action("Forgotpwd","Account") class="dialog">').dialog({
+                open: function (event, ui) { $(this).css("height", 300), $(this).css("width", 300),$(this).css("background-color", "cadetblue") },
+                 autoopen: false,
+                 modal: true,
+                
+               
+
+            });
+            e.preventDefault()
+         });
+
+    });
+
+
+</script>
